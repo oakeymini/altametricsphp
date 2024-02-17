@@ -87,13 +87,20 @@ class InvoiceController extends ResourceController {
 			$invoicesModel = new InvoicesModel();
 			$invoiceData = $invoicesModel->getInvoiceByID($id);
 
-			return $this->respondCreated([
-				"status" => true,
-				"message" => "Profile information of logged in user",
-				"data" => [
-					"user" => $invoiceData
-				]
-			]);
+			if ($invoiceData) {
+				return $this->respondCreated([
+					"status" => true,
+					"message" => "Invoice information",
+					"data" => [
+						"user" => $invoiceData
+					]
+				]);
+			} else {
+				return $this->respondCreated([
+					"status" => true,
+					"message" => "Invoice information not found"
+				]);
+			}
 		} else {
 			return [];
 		}

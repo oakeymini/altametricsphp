@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 80:80
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: pa$$w0rd
+      MYSQL_DATABASE: altametrics
+      MYSQL_USER: altametrics
+      MYSQL_PASSWORD: pa$$w0rd
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  mysql-data:
